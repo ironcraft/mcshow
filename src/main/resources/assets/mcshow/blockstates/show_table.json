@@ -1,0 +1,9 @@
+{
+    "variants": 
+    {
+        "normal": 
+        {
+            "model": "mcshow:show_table"
+        }
+    }
+}

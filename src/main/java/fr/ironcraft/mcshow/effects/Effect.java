@@ -21,6 +21,8 @@ public abstract class Effect<P extends EffectParameters>
      * The parameters of this effect.
      */
     protected final P parameters;
+    
+    protected int age;
 
     public Effect(P parameters)
     {
@@ -42,7 +44,10 @@ public abstract class Effect<P extends EffectParameters>
      */
     public void tick(Show show)
     {
-        
+        if (age++ == parameters.getMaxAge())
+        {
+            setShouldBeRemoved(true);
+        }
     }
 
     /**

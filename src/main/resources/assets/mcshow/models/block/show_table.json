@@ -1,0 +1,7 @@
+{
+    "parent": "builtin/entity",
+    "textures": 
+    {
+        "particle": "mcshow:models/blocks/show_table"
+    }
+}
