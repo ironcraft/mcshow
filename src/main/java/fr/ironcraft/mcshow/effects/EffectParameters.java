@@ -1,4 +1,4 @@
-package fr.ironcraft.mcshow;
+package fr.ironcraft.mcshow.effects;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -27,6 +27,22 @@ public class EffectParameters
      */
     @SerializedName("maxAge")
     private int maxAge;
+    
+    /**
+     * Instantiates a new effect parameters.
+     *
+     * @param x The X padding from the show start position
+     * @param y The Y padding from the show start position
+     * @param z The Z padding from the show start position
+     * @param maxAge The max age of this effect
+     */
+    public EffectParameters(float x, float y, float z, int maxAge)
+    {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.maxAge = maxAge;
+    }
 
     /**
      * Gets the X padding from the show start position.
@@ -69,6 +85,4 @@ public class EffectParameters
     {
         return maxAge;
     }
-    
-    
 }

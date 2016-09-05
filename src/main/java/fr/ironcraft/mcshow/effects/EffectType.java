@@ -1,4 +1,4 @@
-package fr.ironcraft.mcshow;
+package fr.ironcraft.mcshow.effects;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
@@ -19,6 +19,10 @@ public class EffectType<P extends EffectParameters>
      * A unique mapping of identifier -> effect type.
      */
     private static final Map<String, EffectType<? extends EffectParameters>> typesRegistry = new ConcurrentHashMap<String, EffectType<? extends EffectParameters>>();
+    
+    // Built-in types
+    public static final EffectType<TesterParameters> TESTER = new EffectType<TesterParameters>("Tester", Tester.class, TesterParameters.class);
+    public static final EffectType<RayParameters> RAY = new EffectType<RayParameters>("Ray", Ray.class, RayParameters.class);
 
     /**
      * The unique identifier for this effect type.

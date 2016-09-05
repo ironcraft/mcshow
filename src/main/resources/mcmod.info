@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
+  "modid": "mcshow",
+  "name": "McShow",
+  "description": "Visual effects mod in Minecraft.",
+  "version": "0.1",
+  "mcversion": "1.9.4",
+  "url": "http://ironcraft.fr",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["Wytrem"],
+  "credits": "",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

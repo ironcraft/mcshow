@@ -1,4 +1,4 @@
-package fr.ironcraft.mcshow;
+package fr.ironcraft.mcshow.effects;
 
 import java.lang.reflect.Type;
 
@@ -11,11 +11,11 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Contains enough information to build an {@link Effect} object : effect type
- * identifier and parameters.
+ * identifier and parameters. This class is not to be overridden.
  * 
  * @author Wytrem
  */
-public class EffectInfos
+public final class EffectInfos
 {
     /**
      * The identifier for the type of an {@link Effect} built from these infos.
@@ -29,6 +29,17 @@ public class EffectInfos
     @SerializedName("parameters")
     private EffectParameters parameters;
     
+    private EffectInfos()
+    {
+        
+    }
+    
+    public EffectInfos(String type, EffectParameters parameters)
+    {
+        this.type = type;
+        this.parameters = parameters;
+    }
+
     /**
      * @return A new {@link Effect} built on these infos.
      */
@@ -66,6 +77,11 @@ public class EffectInfos
             
             return infos;
         }
-        
+    }
+
+    @Override
+    public String toString()
+    {
+        return "EffectInfos [type=" + type + ", parameters=" + parameters + "]";
     }
 }

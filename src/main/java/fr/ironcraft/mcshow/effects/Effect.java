@@ -1,4 +1,8 @@
-package fr.ironcraft.mcshow;
+package fr.ironcraft.mcshow.effects;
+
+import fr.ironcraft.mcshow.Show;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Represents an actual effect in the world.
@@ -36,7 +40,7 @@ public abstract class Effect<P extends EffectParameters>
     /**
      * Updates this effect.
      */
-    public void tick()
+    public void tick(Show show)
     {
         
     }
@@ -65,5 +69,6 @@ public abstract class Effect<P extends EffectParameters>
     /**
      * Render.
      */
+    @SideOnly(Side.CLIENT)
     public abstract void render();
 }
