@@ -1,5 +1,8 @@
 package fr.ironcraft.mcshow.effects;
 
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.VertexBuffer;
+
 public class Tester extends Effect<TesterParameters>
 {
     public Tester(TesterParameters parameters)
@@ -8,7 +11,7 @@ public class Tester extends Effect<TesterParameters>
     }
 
     @Override
-    public void render()
+    public void render(Tessellator tessellator, VertexBuffer vertexbuffer)
     {
         
     }

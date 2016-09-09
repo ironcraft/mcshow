@@ -7,6 +7,8 @@ import java.util.Map;
 
 import fr.ironcraft.mcshow.effects.Effect;
 import fr.ironcraft.mcshow.effects.EffectInfos;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.RenderTickEvent;
@@ -79,13 +81,13 @@ public class Show
         }
     }
 
-    public void render()
+    public void render(Tessellator tessellator, VertexBuffer vertexbuffer)
     {
         for (Iterator<Effect> iterator = effects.iterator(); iterator.hasNext();)
         {
             Effect effect = iterator.next();
 
-            effect.render();
+            effect.render(tessellator, vertexbuffer);
         }
     }
 }

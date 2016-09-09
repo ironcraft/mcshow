@@ -1,6 +1,8 @@
 package fr.ironcraft.mcshow.effects;
 
 import fr.ironcraft.mcshow.Show;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -79,5 +81,5 @@ public abstract class Effect<P extends EffectParameters>
      * Render.
      */
     @SideOnly(Side.CLIENT)
-    public abstract void render();
+    public abstract void render(Tessellator tessellator, VertexBuffer vertexbuffer);
 }
