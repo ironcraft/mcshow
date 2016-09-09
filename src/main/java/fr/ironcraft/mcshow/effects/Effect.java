@@ -22,11 +22,15 @@ public abstract class Effect<P extends EffectParameters>
      */
     protected final P parameters;
     
+    protected float x, y, z;
     protected int age;
 
     public Effect(P parameters)
     {
         this.parameters = parameters;
+        this.x = parameters.getX();
+        this.y = parameters.getY();
+        this.z = parameters.getZ();
     }
 
     /**

@@ -12,6 +12,7 @@ import fr.ironcraft.mcshow.effects.RayParameters;
 import fr.ironcraft.mcshow.effects.TesterParameters;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 
 public class TileEntityShowTable extends TileEntity implements ITickable
 {
@@ -25,6 +26,11 @@ public class TileEntityShowTable extends TileEntity implements ITickable
         
         ShowInfos showInfos = new ShowInfos("show de test", map);
         currentShow = new Show(showInfos);
+    }
+    
+    public int getBrightnessForRender(float partialTicks)
+    {
+        return this.worldObj.isBlockLoaded(this.pos) ? this.worldObj.getCombinedLight(this.pos, 0) : 0;
     }
     
     public Show getCurrentShow()
