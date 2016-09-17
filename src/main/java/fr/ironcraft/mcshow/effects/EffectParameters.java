@@ -2,41 +2,52 @@ package fr.ironcraft.mcshow.effects;
 
 import com.google.gson.annotations.SerializedName;
 
+import fr.ironcraft.mcshow.utils.Expression;
+
+
 public class EffectParameters
 {
     /**
-     * The X padding from the show start position.
+     * The expression of the function: age -> X position.
      */
     @SerializedName("x")
-    private float x;
-    
+    private Expression x;
+
     /**
-     * The Y padding from the show start position.
+     * The expression of the function: age -> Y position.
      */
     @SerializedName("y")
-    private float y;
-    
+    private Expression y;
+
     /**
-     * The Z padding from the show start position.
+     * The expression of the function: age -> Z position.
      */
     @SerializedName("z")
-    private float z;
-    
+    private Expression z;
+
     /**
-     * The max age of this effect (its lifetime before it gets removed from the world) in ticks.
+     * The max age of this effect (its lifetime before it gets removed from the
+     * world) in ticks.
      */
     @SerializedName("maxAge")
     private int maxAge;
-    
+
+    /**
+     * Instantiates a new effect parameters.
+     */
+    public EffectParameters()
+    {
+    }
+
     /**
      * Instantiates a new effect parameters.
      *
-     * @param x The X padding from the show start position
-     * @param y The Y padding from the show start position
-     * @param z The Z padding from the show start position
+     * @param x The expression of the function: age -> X position
+     * @param y The expression of the function: age -> Y position
+     * @param z The expression of the function: age -> Z position
      * @param maxAge The max age of this effect
      */
-    public EffectParameters(float x, float y, float z, int maxAge)
+    public EffectParameters(Expression x, Expression y, Expression z, int maxAge)
     {
         this.x = x;
         this.y = y;
@@ -45,31 +56,31 @@ public class EffectParameters
     }
 
     /**
-     * Gets the X padding from the show start position.
+     * Gets the expression of the function: age -> X position.
      *
-     * @return The X padding from the show start position
+     * @return The expression of the function: age -> X position
      */
-    public float getX()
+    public Expression getX()
     {
         return x;
     }
 
     /**
-     * Gets the Y padding from the show start position.
+     * Gets the expression of the function: age -> Y position.
      *
-     * @return The Y padding from the show start position
+     * @return The expression of the function: age -> Y position
      */
-    public float getY()
+    public Expression getY()
     {
         return y;
     }
 
     /**
-     * Gets the Z padding from the show start position.
+     * Gets the expression of the function: age -> Z position.
      *
-     * @return The Z padding from the show start position
+     * @return The expression of the function: age -> Z position
      */
-    public float getZ()
+    public Expression getZ()
     {
         return z;
     }

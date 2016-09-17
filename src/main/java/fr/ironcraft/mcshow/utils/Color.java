@@ -1,5 +1,16 @@
 package fr.ironcraft.mcshow.utils;
 
+import java.lang.reflect.Type;
+
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+
+
 /**
  * A color
  *
@@ -1529,4 +1540,37 @@ public class Color
         }
     }
 
+    public static class JsonAdapter implements JsonSerializer<Color>, JsonDeserializer<Color>
+    {
+
+        @Override
+        public Color deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
+        {
+            if (json.isJsonObject())
+            {
+
+                JsonObject jsonObject = json.getAsJsonObject();
+
+                return new Color(jsonObject.get("red").getAsFloat(), jsonObject.get("green").getAsFloat(), jsonObject.get("blue").getAsFloat(), jsonObject.get("alpha").getAsFloat());
+
+            }
+            else if (json.isJsonPrimitive())
+            {
+                return valueOf(json.getAsString());
+            }
+            return null;
+        }
+
+        @Override
+        public JsonElement serialize(Color src, Type typeOfSrc, JsonSerializationContext context)
+        {
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("red", src.getRedFloat());
+            jsonObject.addProperty("green", src.getGreenFloat());
+            jsonObject.addProperty("blue", src.getBlueFloat());
+            jsonObject.addProperty("alpha", src.getAlphaFloat());
+            return jsonObject;
+        }
+
+    }
 }

@@ -1,10 +1,12 @@
 package fr.ironcraft.mcshow.effects;
 
 import fr.ironcraft.mcshow.Show;
+import fr.ironcraft.mcshow.utils.Expression;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 
 /**
  * Represents an actual effect in the world.
@@ -23,16 +25,30 @@ public abstract class Effect<P extends EffectParameters>
      * The parameters of this effect.
      */
     protected final P parameters;
-    
-    protected float x, y, z;
+
+    /**
+     * The current X location of this effect.
+     */
+    protected float x;
+
+    /**
+     * The current Y location of this effect.
+     */
+    protected float y;
+
+    /**
+     * The current Z location of this effect.
+     */
+    protected float z;
+
+    /**
+     * Amount of ticks this effect has been alive.
+     */
     protected int age;
 
     public Effect(P parameters)
     {
         this.parameters = parameters;
-        this.x = parameters.getX();
-        this.y = parameters.getY();
-        this.z = parameters.getZ();
     }
 
     /**
@@ -54,6 +70,38 @@ public abstract class Effect<P extends EffectParameters>
         {
             setShouldBeRemoved(true);
         }
+
+        x = eval(parameters.getX());
+        y = eval(parameters.getY());
+        z = eval(parameters.getZ());
+    }
+
+    /**
+     * Passes this effect usual parameters to the given {@link Expression}, and
+     * evaluates it.
+     * 
+     * @param expr The expression to be evaluated in this {@link Effect} context
+     * @return The {@link Expression} value
+     * @see Effect#passParams(Expression)
+     * @see Expression#eval()
+     */
+    protected float eval(Expression expr)
+    {
+        return passParams(expr).eval();
+    }
+
+    /**
+     * Passes the usual parameters to the given {@link Expression}. You can
+     * override this, but don't forget to call {@code super.passParams(expr)} or
+     * you shall get unpredictable results.
+     * 
+     * @param expr The {@link Expression} to pass parameters to
+     * @return The {@link Expression} with newly set parameters
+     * @see Expression#with(String, float)
+     */
+    protected Expression passParams(Expression expr)
+    {
+        return expr.with("age", age).with("maxAge", getParameters().getMaxAge());
     }
 
     /**
@@ -69,17 +117,17 @@ public abstract class Effect<P extends EffectParameters>
      * Set to {@code true} whenever this effect should be removed from the
      * world.
      * 
-     * @param shouldBeRemoved {@code true} if this effect should be removed or
-     *        not, {@code false} otherwise
+     * @param shouldBeRemoved {@code true} if this effect should be removed,
+     *        {@code false} otherwise
      */
     public void setShouldBeRemoved(boolean shouldBeRemoved)
     {
         this.shouldBeRemoved = shouldBeRemoved;
     }
-
+    
     /**
-     * Render.
+     * Renders.
      */
     @SideOnly(Side.CLIENT)
-    public abstract void render(Tessellator tessellator, VertexBuffer vertexbuffer);
+    public abstract void render(Tessellator tessellator, VertexBuffer vertexbuffer, float partialTicks);
 }

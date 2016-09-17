@@ -21,8 +21,6 @@ public class McShowClient extends McShowCommon
     {
         super.init(event);
     }
-    
-
 
     @Override
     public void registerItemTexture(Item item, int metadata, String name)

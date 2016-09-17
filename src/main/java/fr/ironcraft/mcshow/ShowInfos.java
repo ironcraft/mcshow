@@ -1,11 +1,20 @@
 package fr.ironcraft.mcshow;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.annotations.SerializedName;
 
 import fr.ironcraft.mcshow.effects.EffectInfos;
+import fr.ironcraft.mcshow.utils.Json;
+
 
 public class ShowInfos
 {
@@ -14,7 +23,7 @@ public class ShowInfos
      */
     @SerializedName("name")
     private final String name;
-    
+
     /**
      * This show's timeline. A mapping time -> effects happening.
      */
@@ -26,7 +35,7 @@ public class ShowInfos
         this.name = name;
         this.timeline = timeline;
     }
-    
+
     public Map<Integer, List<EffectInfos>> getTimeline()
     {
         return timeline;
@@ -36,5 +45,27 @@ public class ShowInfos
     public String toString()
     {
         return "ShowInfos [name=" + name + ", timeline=" + timeline + "]";
+    }
+
+    public static ShowInfos read(InputStream stream)
+    {
+        try
+        {
+            StringWriter writer = new StringWriter();
+            IOUtils.copy(stream, writer, "UTF-8");
+            String theString = writer.toString();
+            
+            return Json.GSON.fromJson(theString, ShowInfos.class);
+        }
+        catch (JsonSyntaxException e)
+        {
+            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

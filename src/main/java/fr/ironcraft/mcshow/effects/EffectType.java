@@ -5,6 +5,15 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
+import fr.ironcraft.mcshow.effects.beam.Beam;
+import fr.ironcraft.mcshow.effects.beam.BeamParameters;
+import fr.ironcraft.mcshow.effects.beambunch.BeamBunch;
+import fr.ironcraft.mcshow.effects.beambunch.BeamBunchParameters;
+import fr.ironcraft.mcshow.effects.tester.Tester;
+import fr.ironcraft.mcshow.effects.tester.TesterParameters;
+import fr.ironcraft.mcshow.effects.torus.Torus;
+import fr.ironcraft.mcshow.effects.torus.TorusParameters;
+
 
 /**
  * Represents a type of an {@link Effect}.
@@ -22,7 +31,9 @@ public class EffectType<P extends EffectParameters>
     
     // Built-in types
     public static final EffectType<TesterParameters> TESTER = new EffectType<TesterParameters>("Tester", Tester.class, TesterParameters.class);
-    public static final EffectType<RayParameters> RAY = new EffectType<RayParameters>("Ray", Ray.class, RayParameters.class);
+    public static final EffectType<BeamParameters> BEAM = new EffectType<BeamParameters>("Beam", Beam.class, BeamParameters.class);
+    public static final EffectType<BeamBunchParameters> BEAM_BUNCH = new EffectType<BeamBunchParameters>("BeamBunch", BeamBunch.class, BeamBunchParameters.class);
+    public static final EffectType<TorusParameters> TORUS = new EffectType<TorusParameters>("Torus", Torus.class, TorusParameters.class);
 
     /**
      * The unique identifier for this effect type.

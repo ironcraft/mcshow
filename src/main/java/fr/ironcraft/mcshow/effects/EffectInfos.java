@@ -39,6 +39,16 @@ public final class EffectInfos
         this.type = type;
         this.parameters = parameters;
     }
+    
+    public String getType()
+    {
+        return type;
+    }
+
+    public EffectParameters getParameters()
+    {
+        return parameters;
+    }
 
     /**
      * @return A new {@link Effect} built on these infos.

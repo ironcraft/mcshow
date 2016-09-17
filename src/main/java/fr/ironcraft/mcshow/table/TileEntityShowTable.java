@@ -1,49 +1,26 @@
 package fr.ironcraft.mcshow.table;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import fr.ironcraft.mcshow.Show;
 import fr.ironcraft.mcshow.ShowInfos;
-import fr.ironcraft.mcshow.effects.EffectInfos;
-import fr.ironcraft.mcshow.effects.RayParameters;
-import fr.ironcraft.mcshow.effects.TesterParameters;
+import fr.ironcraft.mcshow.ShowsManager;
+import fr.ironcraft.mcshow.mod.McShowMod;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.BlockPos;
 
-public class TileEntityShowTable extends TileEntity implements ITickable
+public class TileEntityShowTable extends TileEntity
 {
     private Show currentShow;
     
     public void playerClick()
     {
-        Map<Integer, List<EffectInfos>> map = new HashMap<Integer, List<EffectInfos>>();
+        ShowInfos showInfos = ShowInfos.read(ShowInfos.class.getResourceAsStream("show_test.json"));
+        currentShow = new Show(showInfos, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
         
-        map.put(0, Arrays.asList(new EffectInfos("Tester", new TesterParameters(1, 1, 1, 400)), new EffectInfos("Ray", new RayParameters(0.0f, 1.0f, 0.0f, 400, 12345467))));
-        
-        ShowInfos showInfos = new ShowInfos("show de test", map);
-        currentShow = new Show(showInfos);
-    }
-    
-    public int getBrightnessForRender(float partialTicks)
-    {
-        return this.worldObj.isBlockLoaded(this.pos) ? this.worldObj.getCombinedLight(this.pos, 0) : 0;
+        McShowMod.showsManager.startShow(currentShow);
     }
     
     public Show getCurrentShow()
     {
         return currentShow;
-    }
-    
-    @Override
-    public void update()
-    {
-        if (currentShow != null)
-        {
-            currentShow.tick();
-        }
     }
 }

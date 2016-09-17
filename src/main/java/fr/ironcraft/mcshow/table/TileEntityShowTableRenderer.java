@@ -17,7 +17,6 @@ public class TileEntityShowTableRenderer extends TileEntitySpecialRenderer<TileE
     @Override
     public void renderTileEntityAt(TileEntityShowTable te, double x, double y, double z, float partialTicks, int destroyStage)
     {
-
         Tessellator tessellator = Tessellator.getInstance();
         VertexBuffer vertexbuffer = tessellator.getBuffer();
         
@@ -36,11 +35,6 @@ public class TileEntityShowTableRenderer extends TileEntitySpecialRenderer<TileE
         else
         {
             GlStateManager.shadeModel(GL11.GL_FLAT);
-        }
-        
-        if (te.getCurrentShow() != null)
-        {
-            te.getCurrentShow().render(tessellator, vertexbuffer);
         }
         RenderHelper.enableStandardItemLighting();
         GlStateManager.popMatrix();
